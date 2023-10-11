@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ERP.Api.Entity", "ERP.Api.E
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ERP.Api.Service", "ERP.Api.Service\ERP.Api.Service.csproj", "{4F7D2764-2533-4232-B704-86AE82697F1A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ERP.Api.Controllers", "ERP.Api.Controllers\ERP.Api.Controllers.csproj", "{4140C66B-38E6-4EA1-925F-AB8643C8B163}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,10 +27,6 @@ Global
 		{4F7D2764-2533-4232-B704-86AE82697F1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4F7D2764-2533-4232-B704-86AE82697F1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4F7D2764-2533-4232-B704-86AE82697F1A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4140C66B-38E6-4EA1-925F-AB8643C8B163}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4140C66B-38E6-4EA1-925F-AB8643C8B163}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4140C66B-38E6-4EA1-925F-AB8643C8B163}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4140C66B-38E6-4EA1-925F-AB8643C8B163}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
