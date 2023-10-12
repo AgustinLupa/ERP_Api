@@ -1,4 +1,7 @@
 
+using ERP.Api.Entity.Contracts;
+using ERP.Api.Service;
+
 namespace ERP.Api
 {
     public class Program
@@ -13,6 +16,9 @@ namespace ERP.Api
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            builder.Services.AddSingleton<Context>();
+            builder.Services.AddScoped<IUserService, UserService>();
 
             var app = builder.Build();
 
