@@ -7,5 +7,6 @@ namespace ERP.Api.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
+
     }
 }

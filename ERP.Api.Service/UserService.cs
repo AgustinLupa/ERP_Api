@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ERP.Api.Service
 {
-    internal class UserService
+    public class UserService
     {
     }
 }
