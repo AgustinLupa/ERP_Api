@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Dapper;
 using ERP.Api.Entity;
 using ERP.Api.Entity.Contracts;
+using MySql.Data.MySqlClient;
 
 namespace ERP.Api.Service
 {
@@ -68,5 +69,61 @@ namespace ERP.Api.Service
                 }
             }
         }
+
+        public async Task<int> Create(User user)
+        {
+            using (var connection = _context.CreateConnection())
+            {
+                try
+                {
+                    connection.Open();
+                    var mysql = @"INSERT INTO users(name, password, id_role) Values (@Name, @Password, @Id_Role)";
+                    var result = await connection.ExecuteAsync(mysql, user);                    
+                   return result;                   
+                }
+                catch (Exception)
+                {
+                    connection.Close();
+                    return 0;
+                }
+            }
+        }
+
+        public async Task<int> Update(User user)
+        {
+            using (var connection = _context.CreateConnection())
+            {
+                try
+                { 
+                    var mysql = @"UPDATE users SET name = @Name, password=@Password, id_role=@Id_Role, state=@State where (id = @Id)";
+                    var result = await connection.ExecuteAsync(mysql, user);                    
+                    return result;                   
+                }
+                catch (Exception)
+                {
+                    connection.Close();
+                    return 0;
+                }
+            }
+        }
+
+        public async Task<int> Delete(int id)
+        {
+            using (var connection = _context.CreateConnection())
+            {
+                try
+                {
+                    var mysql = @"UPDATE users SET state=0 where (id = @Id)";
+                    var result = await connection.ExecuteAsync(mysql, new {Id = id});
+                    return result;
+                }
+                catch (Exception)
+                {
+                    connection.Close();
+                    return 0;
+                }
+            }
+        }
+
     }
 }

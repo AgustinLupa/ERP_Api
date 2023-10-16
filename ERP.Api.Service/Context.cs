@@ -21,7 +21,6 @@ namespace ERP.Api.Service
             _connectionString = _configuration.GetConnectionString("DefaultConnection");
         }
 
-        public IDbConnection CreateConnection() => new MySqlConnection(_connectionString);
-        //public SqlTableDependency<Aircraft> ServiceBrokerConnection() => new SqlTableDependency<Aircraft>(_connectionString);
+        public IDbConnection CreateConnection() => new MySqlConnection(_connectionString);        
     }
 }
