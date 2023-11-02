@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using ERP.Api.Entity;
+using ERP.Api.Entity.Contracts;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ERP.Api.Service
 {
-    public class RoleService
+    public class RoleService : IRoleService
     {
         private readonly Context _context;
 

@@ -19,6 +19,7 @@ namespace ERP.Api
 
             builder.Services.AddSingleton<Context>();
             builder.Services.AddScoped<IUserService, UserService>();
+            builder.Services.AddScoped<IRoleService, RoleService>();
 
             var app = builder.Build();
 
