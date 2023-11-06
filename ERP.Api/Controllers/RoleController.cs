@@ -1,4 +1,5 @@
-﻿using ERP.Api.Entity.Contracts;
+﻿using ERP.Api.Entity;
+using ERP.Api.Entity.Contracts;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ERP.Api.Controllers
@@ -19,6 +20,12 @@ namespace ERP.Api.Controllers
         {
             var users = await data.GetAll();
             return Ok(users);
+        }
+
+        public async Task<IActionResult> GetActiveRole()
+        {
+            var rsp= await data.GetActiveRole();
+            return Ok(rsp);
         }
     }
 }
