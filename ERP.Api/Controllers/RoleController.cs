@@ -22,10 +22,15 @@ namespace ERP.Api.Controllers
             return Ok(users);
         }
 
+        [HttpGet]
+        [Route("active")]
         public async Task<IActionResult> GetActiveRole()
         {
             var rsp= await data.GetActiveRole();
             return Ok(rsp);
         }
+        [HttpGet]
+        [Route("{id}")]
+        public Task<Role> GetById(int id);
     }
 }
