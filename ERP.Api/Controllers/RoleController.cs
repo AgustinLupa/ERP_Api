@@ -29,8 +29,13 @@ namespace ERP.Api.Controllers
             var rsp= await data.GetActiveRole();
             return Ok(rsp);
         }
+
         [HttpGet]
         [Route("{id}")]
-        public Task<Role> GetById(int id);
+        public async Task<IActionResult> GetById(int id)
+        {
+            var rsp = await data.GetById(id);
+            return Ok(rsp);
+        }
     }
 }
