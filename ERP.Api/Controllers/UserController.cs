@@ -47,16 +47,11 @@ namespace ERP.Api.Controllers
             };
             var json = "";
             var result = await data.Login(user);
-            if(result.Name == "")
+            if(result.Name != "")
             {
-                json = "No existe";
+                return Ok(json);
             }
-            else
-            {
-                json = "Existe";
-            }
-            
-            return Ok(json);
+            return NotFound();
         }
 
         [HttpPost]
