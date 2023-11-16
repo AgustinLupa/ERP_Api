@@ -44,12 +44,11 @@ namespace ERP.Api.Controllers
             {
                 Name = username,
                 Password = KeySha256.CalculateSHA256(password)
-            };
-            var json = "";
+            };            
             var result = await data.Login(user);
             if(result.Name != "")
             {
-                return Ok(json);
+                return Ok(result);
             }
             return NotFound();
         }

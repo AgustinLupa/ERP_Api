@@ -45,6 +45,8 @@ namespace ERP.Api
                 .AllowAnyHeader();
             });
 
+
+
             app.Run();
         }
     }
