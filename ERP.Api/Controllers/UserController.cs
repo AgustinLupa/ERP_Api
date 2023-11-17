@@ -6,6 +6,7 @@ using ERP.Api.Entity;
 using System.Xml.Linq;
 using ERP.Api.Utils;
 using Newtonsoft.Json.Linq;
+using Microsoft.Extensions.Configuration;
 
 namespace ERP.Api.Controllers
 {
@@ -14,10 +15,12 @@ namespace ERP.Api.Controllers
     public class UserController : ControllerBase
     {
         IUserService data;
+        private readonly IConfiguration configuration;
 
-        public UserController(IUserService userService)
+        public UserController(IUserService userService, IConfiguration _configuration)
         {
             data = userService;
+            this.configuration = _configuration;
         }
 
 
@@ -44,11 +47,14 @@ namespace ERP.Api.Controllers
             {
                 Name = username,
                 Password = KeySha256.CalculateSHA256(password)
-            };            
-            var result = await data.Login(user);
+            };
+            
+            var result = await data.Login(user);            
             if(result.Name != "")
             {
-                return Ok(result);
+                var token = JWTToken.CreateToken(result, configuration);
+                var json = new { Token= token, User = result };
+                return Ok(json);
             }
             return NotFound();
         }
