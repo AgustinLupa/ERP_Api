@@ -76,14 +76,13 @@ namespace ERP.Api.Service
             {
                 try
                 {
-                    connection.Open();
-                    var mysql = @"INSERT INTO users(name, password, id_role) Values (@Name, @Password, @Id_Role)";
-                    var result = await connection.ExecuteAsync(mysql, user);                    
+                    var mysql = @"INSERT INTO users(name, password, id_role) Values (@Name, @Password, @Id_Role);
+                                  SELECT LAST_INSERT_ID()";
+                    var result = await connection.QuerySingleAsync<int>(mysql, user);                    
                    return result;                   
                 }
                 catch (Exception)
                 {
-                    connection.Close();
                     return 0;
                 }
             }
