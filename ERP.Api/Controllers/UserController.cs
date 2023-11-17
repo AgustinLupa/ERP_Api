@@ -6,6 +6,8 @@ using ERP.Api.Entity;
 using System.Xml.Linq;
 using ERP.Api.Utils;
 using Newtonsoft.Json.Linq;
+using ERP.Api.Models.Request;
+using ERP.Api.Models.Response;
 
 namespace ERP.Api.Controllers
 {
@@ -56,16 +58,30 @@ namespace ERP.Api.Controllers
 
         [HttpPost]
         [Route("create")]
-        public async Task<IActionResult> Create(string username, string password, int id_rol)
+        public async Task<IActionResult> Create(NewUser newUser)
         {
-            User user = new()
+            if (ModelState.IsValid == false) return ValidationProblem(ModelState);
+            if (Enum.IsDefined(typeof(Roles), newUser.id_role) == false) 
+                return BadRequest(new HttpResult
+                    {
+                        StatusCode = 400,
+                        Message = "No se ha seleccionado un rol valido.",
+                        Request= newUser
+                    });
+            var user = new User
             {
-                Name = username,
-                Password = KeySha256.CalculateSHA256(password),
-                Id_Role = id_rol
+                Name = newUser.username,
+                Password = KeySha256.CalculateSHA256(newUser.password),
+                Id_Role = (int)newUser.id_role,
             };
             var result = await data.Create(user);
-            return Ok(result);
+            if (result == 0) return StatusCode(500, new HttpResult
+                {
+                    StatusCode = 500,
+                    Message = "Ha ocurrido un error inesperado.",
+                    Request= newUser
+                });
+            return Ok(new HttpResult(){ Response = result });
         }
 
         [HttpPut]
