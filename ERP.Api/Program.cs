@@ -18,6 +18,8 @@ namespace ERP.Api
             builder.Services.AddSwaggerGen();
 
             builder.Services.AddSingleton<Context>();
+
+
             builder.Services.AddScoped<IUserService, UserService>();
             builder.Services.AddScoped<IRoleService, RoleService>();
 
@@ -44,6 +46,8 @@ namespace ERP.Api
                 .AllowAnyMethod()
                 .AllowAnyHeader();
             });
+
+
 
             app.Run();
         }

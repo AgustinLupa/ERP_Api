@@ -59,7 +59,7 @@ namespace ERP.Api.Service
             {
                 try
                 {
-                    var mysql = @"SELECT name FROM users WHERE((state = 1) and ((name = @Name) and (password = @Password)))";
+                    var mysql = @"SELECT name, id, state, id_role  FROM users WHERE((state = 1) and ((name = @Name) and (password = @Password)))";
                     var result = await connection.QueryFirstOrDefaultAsync<User>(mysql, user);
                     return result;
                 }
