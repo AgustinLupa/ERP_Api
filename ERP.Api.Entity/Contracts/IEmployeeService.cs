@@ -8,5 +8,6 @@ public interface IEmployeeService
     public Task<IEnumerable<Employee>> GetAll();
     public Task<IEnumerable<Employee>> GetActiveEmployee();
     public Task<int> CreateEmployee(Employee employee);
-    public Task<int> DeleteEmployee(Employee code_Employee);
+    public Task<int> DeleteEmployee(int code_Employee);
+    public Task<int> UpdateEmployee(Employee employee);
 }
