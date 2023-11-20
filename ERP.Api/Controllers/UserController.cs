@@ -39,7 +39,7 @@ namespace ERP.Api.Controllers
             return Ok(new HttpResult { Response = user });
         }
 
-        [HttpGet, Authorize]
+        [HttpGet, Authorize(Roles = "Admin")]
         [Route("active")]
         public async Task<IActionResult> GetActive()
         {
@@ -75,7 +75,7 @@ namespace ERP.Api.Controllers
             return NotFound(new HttpResult { StatusCode = 404, Message = "Credenciales incorrectas."});
         }
 
-        [HttpPost, Authorize]
+        [HttpPost, Authorize(Roles = "Admin")]
         [Route("create")]
         public async Task<IActionResult> Create([FromBody] SaveUser newUser)
         {
@@ -103,7 +103,7 @@ namespace ERP.Api.Controllers
             return Ok(new HttpResult(){ Response = result });
         }
 
-        [HttpPut]
+        [HttpPut, Authorize(Roles = "Admin")]
         [Route("update/{id}")]
         public async Task<IActionResult> Update(int id, [FromBody] SaveUser editUser)
         {
@@ -133,7 +133,7 @@ namespace ERP.Api.Controllers
             return Ok(new HttpResult() { Response = result });
         }
 
-        [HttpDelete]
+        [HttpDelete, Authorize(Roles = "Admin")]
         [Route("delete/{id_user}")]
         public async Task<IActionResult> Delete(int id_user)
         {            
