@@ -1,10 +1,11 @@
 ﻿using Dapper;
+using ERP.Api.Entity.Contracts;
 using MySql.Data.MySqlClient;
 using SystemERP.Model;
 
 namespace ERP.Api.Service;
 
-public class EmployeeService
+public class EmployeeService : IEmployeeService
 {
     private readonly Context _context;
 

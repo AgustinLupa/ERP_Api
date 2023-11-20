@@ -9,6 +9,7 @@ using Newtonsoft.Json.Linq;
 using Microsoft.Extensions.Configuration;
 using ERP.Api.Models.Request;
 using ERP.Api.Models.Response;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ERP.Api.Controllers
 {
@@ -16,7 +17,7 @@ namespace ERP.Api.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        IUserService data;
+        private readonly IUserService data;
         private readonly IConfiguration configuration;
 
         public UserController(IUserService userService, IConfiguration _configuration)
@@ -26,14 +27,14 @@ namespace ERP.Api.Controllers
         }
 
 
-        [HttpGet]
+        [HttpGet, Authorize(Roles="Admin")]
         public async Task< IActionResult> GetAll()
         {
             var users = await data.GetAll();
             return Ok(users);
         }
 
-        [HttpGet]
+        [HttpGet, Authorize]
         [Route("active")]
         public async Task<IActionResult> GetActive()
         {
@@ -61,7 +62,7 @@ namespace ERP.Api.Controllers
             return NotFound();
         }
 
-        [HttpPost]
+        [HttpPost, Authorize]
         [Route("create")]
         public async Task<IActionResult> Create(NewUser newUser)
         {
@@ -89,7 +90,7 @@ namespace ERP.Api.Controllers
             return Ok(new HttpResult(){ Response = result });
         }
 
-        [HttpPut]
+        [HttpPut, Authorize]
         [Route("update")]
         public async Task<IActionResult> Update(int id_user, string username, string password, int id_role, int state)
         {
@@ -105,7 +106,7 @@ namespace ERP.Api.Controllers
             return Ok(result);
         }
 
-        [HttpDelete]
+        [HttpDelete, Authorize]
         [Route("delete")]
         public async Task<IActionResult> Delete(int id_user)
         {            
