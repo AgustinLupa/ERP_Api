@@ -15,10 +15,20 @@ namespace ERP.Api.Utils
     {
         public  static string CreateToken(User user, IConfiguration configuration)
         {
+            var role = "";
+            if (user.Id_Role == 2)
+            {
+                role = "Admin";
+            }
+            else
+            {
+                role = "User";
+            }
+
             List<Claim> claims = new List<Claim> { 
                 new Claim(ClaimTypes.Name, user.Name),
-                new Claim(ClaimTypes.Role, user.Name),
-                new Claim(ClaimTypes.Role, user.Name),
+                new Claim(ClaimTypes.Role, role),
+                new Claim(ClaimTypes.Role, role),
             };            
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(
