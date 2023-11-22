@@ -83,14 +83,33 @@ public class EmployeeService : IEmployeeService
         }
     }
 
-    public async Task<int> DeleteEmployee(Employee code_Employee)
+    public async Task<int> DeleteEmployee(int code_Employee)
     {
         using (var connection = _context.CreateConnection())
         {
             try
             {
                 var mysql = @"Update employee Set state = 0 where(code_employee = @Code_Employee);";
-                var result = await connection.ExecuteAsync(mysql, code_Employee);
+                var result = await connection.ExecuteAsync(mysql, new { Code_Employee = code_Employee});
+                return result;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+    }
+
+    public async Task<int> UpdateEmployee(Employee employee)
+    {
+        using (var connection = _context.CreateConnection())
+        {
+            try
+            {
+                var mysql = @"Update employee Set state = @State, name= @name,
+                lastname=@LastName, code_employee = @Code_Employee, dni = @Dni
+                where(id = @Id);";
+                var result = await connection.ExecuteAsync(mysql, employee);
                 return result;
             }
             catch (Exception)
