@@ -20,12 +20,10 @@ public class SupplierService : ISupplierService
         {
             try
             {
-                connection.Open();
                 var mysql = @"INSERT INTO supplier(name, adress, phone) 
                                   Values (@Name, @Adress, @Phone);
                                   SELECT CAST(SCOPE_IDENTITY() as int)";
                 var result = await connection.QuerySingleAsync<int>(mysql, supplier);
-                connection.Close();
                 return result;
             }
             catch (Exception)
@@ -60,7 +58,7 @@ public class SupplierService : ISupplierService
         }
     }
 
-    public async Task<bool> DeleteSupplier(Supplier supplier)
+    public async Task<bool> DeleteSupplier(int id)
     {
         using (var connection = _context.CreateConnection())
         {
@@ -68,7 +66,7 @@ public class SupplierService : ISupplierService
             {
                 connection.Open();
                 var mysql = @"UPDATE supplier SET state= 0 WHERE (id =@Id)";
-                var result = await connection.ExecuteAsync(mysql, supplier);
+                var result = await connection.ExecuteAsync(mysql, new {Id = id});
                 connection.Close();
                 if (result > 0)
                 {
