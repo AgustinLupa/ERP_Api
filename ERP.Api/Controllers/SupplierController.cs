@@ -21,7 +21,7 @@ public class SupplierController : ControllerBase
     }
 
     // GET: api/<SupplierController>
-    [HttpGet]
+    [HttpGet, Authorize]
     public async Task<IActionResult> GetAll()
     {
         var result= await _service.GetAll();
@@ -34,7 +34,7 @@ public class SupplierController : ControllerBase
         return Ok(new HttpResult { Response = result});
     }
 
-    [HttpGet]
+    [HttpGet, Authorize]
     [Route("active")]
     public async Task<IActionResult> GetActive()
     {
@@ -49,7 +49,7 @@ public class SupplierController : ControllerBase
     }
 
     // GET api/<SupplierController>/5
-    [HttpGet("{id}")]
+    [HttpGet("{id}"), Authorize]
     public async Task<IActionResult> Get(int id)
     {
         var result = await _service.GetById(id);
@@ -66,7 +66,7 @@ public class SupplierController : ControllerBase
     }
 
     // POST api/<SupplierController>
-    [HttpPost("create")]
+    [HttpPost("create"), Authorize]
     public async Task<IActionResult> Create([FromBody] SaveSupplier newSupplier)
     {
         if (ModelState.IsValid == false) return ValidationProblem(ModelState);
@@ -87,7 +87,7 @@ public class SupplierController : ControllerBase
     }
 
     // PUT api/<SupplierController>/5
-    [HttpPut("{id}")]
+    [HttpPut("{id}"), Authorize]
     public async Task<IActionResult> Put(int id, [FromBody] SaveSupplier editSupplier)
     {
         if (ModelState.IsValid == false) return ValidationProblem(ModelState);
@@ -109,7 +109,7 @@ public class SupplierController : ControllerBase
     }
 
     // DELETE api/<SupplierController>/5
-    [HttpDelete("{id}")]
+    [HttpDelete("{id}"), Authorize]
     public async Task<IActionResult> Delete(int id)
     {
         var result = await _service.DeleteSupplier(id);
