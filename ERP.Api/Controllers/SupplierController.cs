@@ -65,6 +65,23 @@ public class SupplierController : ControllerBase
         return Ok( new HttpResult { Response= result});
     }
 
+    // GET api/<SupplierController>/find/5
+    [HttpGet("find/{name}"), Authorize]
+    public async Task<IActionResult> GetByName(string name)
+    {
+        var result = await _service.GetByName(name);
+        if (result == null)
+        {
+            return NotFound(new HttpResult
+            {
+                StatusCode = 404,
+                Message = "No se ha encontrado el proveedor buscado.",
+                Request = name
+            });
+        }
+        return Ok(new HttpResult { Response = result });
+    }
+
     // POST api/<SupplierController>
     [HttpPost("create"), Authorize]
     public async Task<IActionResult> Create([FromBody] SaveSupplier newSupplier)
@@ -93,13 +110,14 @@ public class SupplierController : ControllerBase
         if (ModelState.IsValid == false) return ValidationProblem(ModelState);
         var supplier = new Supplier
         {
+            Id = id,
             Name = editSupplier.Name,
             Adress = editSupplier.Address,
             Phone = editSupplier.Phone,
             State = editSupplier.State,
         };
-        var result = await _service.CreateSupplier(supplier);
-        if (result == 0) return NotFound(new HttpResult
+        var result = await _service.UpdateSupplier(supplier);
+        if (result == false) return NotFound(new HttpResult
         {
             StatusCode = 404,
             Message = "No se ha encontrado al proveedor.",
@@ -115,6 +133,6 @@ public class SupplierController : ControllerBase
         var result = await _service.DeleteSupplier(id);
         if (result == false)
             return NotFound(new HttpResult { Message= "No se ha encontrado al proveedor." });
-        return Ok(new HttpResult { });
+        return Ok(new HttpResult { Message= "Proveedor eliminado con exito." });
     }
 }
