@@ -27,7 +27,6 @@ public class SupplierService : ISupplierService
             }
             catch (Exception)
             {
-                connection.Close();
                 return 0;
             }
         }
@@ -39,10 +38,8 @@ public class SupplierService : ISupplierService
         {
             try
             {
-                connection.Open();
-                var mysql = @"UPDATE supplier SET name = @Name, adress = @Adress, phone = @Phone, state= @state WHERE (id =@Id)";
+                var mysql = @"UPDATE supplier SET name = @Name, adress = @Adress, phone = @Phone, state= @state WHERE (id =@Id) LIMIT 1";
                 var result = await connection.ExecuteAsync(mysql, supplier);
-                connection.Close();
                 if (result > 0)
                 {
                     return true;
@@ -63,10 +60,8 @@ public class SupplierService : ISupplierService
         {
             try
             {
-                connection.Open();
-                var mysql = @"UPDATE supplier SET state= 0 WHERE (id =@Id)";
+                var mysql = @"UPDATE supplier SET state= 0 WHERE (id =@Id) LIMIT 1";
                 var result = await connection.ExecuteAsync(mysql, new {Id = id});
-                connection.Close();
                 if (result > 0)
                 {
                     return true;
@@ -75,7 +70,6 @@ public class SupplierService : ISupplierService
             }
             catch (Exception)
             {
-                connection.Close();
                 return false;
             }
         }
@@ -109,12 +103,12 @@ public class SupplierService : ISupplierService
         {
             try
             {
-                connection.Open();
                 var query = @"
                     SELECT s.id, s.name, s.state, s.adress, s.phone                    
                     FROM supplier s
-                    WHERE (s.id = @Id)";
-                var result = await connection.QueryFirstOrDefaultAsync<Supplier>(query);                    
+                    WHERE (s.id = @id)
+                    LIMIT 1";
+                var result = await connection.QueryFirstOrDefaultAsync<Supplier>(query, new { id });                    
                 return result;
             }
             catch (Exception)
@@ -142,6 +136,28 @@ public class SupplierService : ISupplierService
             catch (Exception)
             {
                 List<Supplier> supplier = new List<Supplier>();
+                return supplier;
+            }
+        }
+    }
+
+    public async Task<Supplier> GetByName(string name)
+    {
+        using (var connection = _context.CreateConnection())
+        {
+            try
+            {
+                var query = @"
+                    SELECT s.id, s.name, s.state, s.adress, s.phone                    
+                    FROM supplier s
+                    WHERE (s.name = @name)
+                    LIMIT 1";
+                var result = await connection.QueryFirstOrDefaultAsync<Supplier>(query, new { name });
+                return result;
+            }
+            catch (Exception)
+            {
+                Supplier supplier = new Supplier();
                 return supplier;
             }
         }
