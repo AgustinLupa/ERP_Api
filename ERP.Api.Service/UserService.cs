@@ -77,8 +77,8 @@ namespace ERP.Api.Service
                 try
                 {
                     var mysql = @"INSERT INTO users(name, password, id_role) Values (@Name, @Password, @Id_Role);
-                                  SELECT LAST_INSERT_ID()";
-                    var result = await connection.QuerySingleAsync<int>(mysql, user);                    
+                                  SELECT LAST_INSERT_ID() as id";
+                    var result = await connection.ExecuteAsync(mysql, user);                    
                    return result;                   
                 }
                 catch (Exception)

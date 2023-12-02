@@ -21,9 +21,8 @@ public class SupplierService : ISupplierService
             try
             {
                 var mysql = @"INSERT INTO supplier(name, adress, phone) 
-                                  Values (@Name, @Adress, @Phone);
-                                  SELECT CAST(SCOPE_IDENTITY() as int)";
-                var result = await connection.QuerySingleAsync<int>(mysql, supplier);
+                                  Values (@Name, @Adress, @Phone)";
+                var result = await connection.ExecuteAsync(mysql, supplier);
                 return result;
             }
             catch (Exception)
