@@ -59,7 +59,7 @@ namespace ERP.Api.Service
             {
                 try
                 {
-                    var mysql = @"SELECT name, id, state, id_role  FROM users WHERE((state = 1) and ((name = @Name) and (password = @Password)))";
+                    var mysql = @"SELECT name, id, state, id_role  FROM users WHERE((state = 1) and ((name = @Name) and (password = @Password))) LIMIT 1";
                     var result = await connection.QueryFirstOrDefaultAsync<User>(mysql, user);
                     return result;
                 }
@@ -94,7 +94,7 @@ namespace ERP.Api.Service
             {
                 try
                 { 
-                    var mysql = @"UPDATE users SET name = @Name, password=@Password, id_role=@Id_Role, state=@State where (id = @Id)";
+                    var mysql = @"UPDATE users SET name = @Name, password=@Password, id_role=@Id_Role, state=@State where (id = @Id) LIMIT 1";
                     var result = await connection.ExecuteAsync(mysql, user);                    
                     return result;                   
                 }
@@ -112,7 +112,7 @@ namespace ERP.Api.Service
             {
                 try
                 {
-                    var mysql = @"UPDATE users SET state=0 where (id = @Id)";
+                    var mysql = @"UPDATE users SET state=0 where (id = @Id) LIMIT 1";
                     var result = await connection.ExecuteAsync(mysql, new {Id = id});
                     return result;
                 }

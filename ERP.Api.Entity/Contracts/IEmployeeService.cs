@@ -10,4 +10,5 @@ public interface IEmployeeService
     public Task<int> CreateEmployee(Employee employee);
     public Task<int> DeleteEmployee(int code_Employee);
     public Task<int> UpdateEmployee(Employee employee);
+    public Task<Employee> GetByName(string name);
 }

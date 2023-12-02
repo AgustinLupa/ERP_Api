@@ -119,5 +119,24 @@ namespace ERP.Api.Controllers
             if (result == 0) return NotFound(new HttpResult { StatusCode = 404, Message = "No se ha encontrado el usuario." });
             return Ok(new HttpResult{ Message = "Exito al Eliminar" });
         }
+
+
+        [HttpGet("{name}")]
+        [Route("find")]
+        public async Task<IActionResult> GetByName(string name)
+        {
+            if(string.IsNullOrEmpty(name)){
+                var json = new { StatusCode = 404 };
+                return BadRequest(new HttpResult { Message = "Error al leer el nombre", Response = json });
+            }
+            var result = await data.GetByName(name);
+            if (result == null)
+            {
+                return StatusCode(204,
+                new HttpResult { StatusCode = 404, Message = "No se encontraron usuarios." });
+            };
+            return Ok(new HttpResult { Response = result });
+
+        }
     }
 }

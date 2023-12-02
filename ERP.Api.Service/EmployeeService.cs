@@ -20,7 +20,7 @@ public class EmployeeService : IEmployeeService
         {
             try
             {
-                var mysql = @"SELECT id, name, lastname, state, dni, code_employee FROM employee where (code_employee = @code_Employee)";
+                var mysql = @"SELECT id, name, lastname, state, dni, code_employee FROM employee where (code_employee = @code_Employee) LIMIT 1";
                 var result = await connection.QuerySingleOrDefaultAsync<Employee>(mysql, new { code_Employee });               
                 return result;
             }
@@ -44,6 +44,23 @@ public class EmployeeService : IEmployeeService
             catch (Exception)
             {
                 return new List<Employee>();
+            }
+        }
+    }
+
+    public async Task<Employee> GetByName(string name)
+    {
+        using (var connection = _context.CreateConnection())
+        {
+            try
+            {
+                var mysql = @"SELECT id, name, lastname, state, dni, code_employee FROM employee WHERE name = @Name LIMIT 1";
+                var result = await connection.QueryFirstOrDefaultAsync<Employee>(mysql, new {Name = name});
+                return result;
+            }
+            catch (Exception)
+            {
+                return new Employee();
             }
         }
     }
@@ -89,7 +106,7 @@ public class EmployeeService : IEmployeeService
         {
             try
             {
-                var mysql = @"Update employee Set state = 0 where(code_employee = @Code_Employee);";
+                var mysql = @"Update employee Set state = 0 where(code_employee = @Code_Employee) LIMIT 1;";
                 var result = await connection.ExecuteAsync(mysql, new { Code_Employee = code_Employee});
                 return result;
             }
@@ -108,7 +125,7 @@ public class EmployeeService : IEmployeeService
             {
                 var mysql = @"Update employee Set state = @State, name= @name,
                 lastname=@LastName, code_employee = @Code_Employee, dni = @Dni
-                where(id = @Id);";
+                where(id = @Id) LIMIT 1;";
                 var result = await connection.ExecuteAsync(mysql, employee);
                 return result;
             }
