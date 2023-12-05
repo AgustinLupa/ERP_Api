@@ -133,8 +133,7 @@ namespace ERP.Api.Controllers
         }
 
 
-        [HttpGet("{name}"), Authorize]
-        [Route("find")]
+        [HttpGet("find/{name}"), Authorize]
         public async Task<IActionResult> GetByName(string name)
         {
             if(string.IsNullOrEmpty(name)){
