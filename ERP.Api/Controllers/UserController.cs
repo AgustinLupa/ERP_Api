@@ -119,7 +119,6 @@ namespace ERP.Api.Controllers
             {
                 Id = id,
                 Name = editUser.username,
-                Password = KeySha256.CalculateSHA256(editUser.password),
                 Id_Role = (int)editUser.id_role,
                 State = editUser.state
             };
