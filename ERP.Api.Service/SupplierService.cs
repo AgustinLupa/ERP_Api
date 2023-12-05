@@ -141,7 +141,7 @@ public class SupplierService : ISupplierService
         }
     }
 
-    public async Task<Supplier> GetByName(string name)
+    public async Task<IEnumerable<Supplier>> GetByName(string name)
     {
         using (var connection = _context.CreateConnection())
         {
@@ -150,15 +150,14 @@ public class SupplierService : ISupplierService
                 var query = @"
                     SELECT s.id, s.name, s.state, s.adress, s.phone                    
                     FROM supplier s
-                    WHERE (s.name = @name)
-                    LIMIT 1";
-                var result = await connection.QueryFirstOrDefaultAsync<Supplier>(query, new { name });
+                    WHERE (s.name LIKE @name)
+                    LIMIT 5";
+                var result = await connection.QueryAsync<Supplier>(query, new { name= name + "%" });
                 return result;
             }
             catch (Exception)
             {
-                Supplier supplier = new Supplier();
-                return supplier;
+                return new List<Supplier>();
             }
         }
     }
