@@ -25,7 +25,7 @@ namespace ERP.Api.Service
             {
                 try
                 {
-                    var mysql = @"SELECT * FROM users order by name ASC";
+                    var mysql = @"SELECT id, name, id_role FROM users order by name ASC";
                     var result = await connection.QueryAsync<User>(mysql);                    
                     return result.ToList();
                 }
@@ -42,7 +42,7 @@ namespace ERP.Api.Service
             {
                 try
                 {
-                    var mysql = @"SELECT * FROM users Where(state = 1)";
+                    var mysql = @"SELECT id, name, id_role FROM users Where(state = 1)";
                     var result = await connection.QueryAsync<User>(mysql);
                     return result.ToList();
                 }

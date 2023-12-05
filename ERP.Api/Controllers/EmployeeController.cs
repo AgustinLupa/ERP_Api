@@ -31,11 +31,23 @@ namespace ERP.Api.Controllers
             if (employees == null || (employees.Any() == false))
             {
                 return StatusCode(204,
-                new HttpResult { StatusCode = 204, Message = "No se encontraron usuarios." });
+                new HttpResult { StatusCode = 204, Message = "No se encontraron Empleados." });
             };
             return Ok(new HttpResult { Response = employees });
         }
 
+        [HttpGet, Authorize]
+        [Route("active")]
+        public async Task<IActionResult> GetActive()
+        {
+            var employees = await data.GetActiveEmployee();
+            if (employees == null || (employees.Any() == false))
+            {
+                return StatusCode(204,
+                new HttpResult { StatusCode = 204, Message = "No se encontraron Empleados." });
+            };
+            return Ok(new HttpResult { Response = employees });
+        }
 
 
         // GET api/<EmployeeController>/5        
@@ -121,7 +133,7 @@ namespace ERP.Api.Controllers
         }
 
 
-        [HttpGet("{name}")]
+        [HttpGet("{name}"), Authorize]
         [Route("find")]
         public async Task<IActionResult> GetByName(string name)
         {

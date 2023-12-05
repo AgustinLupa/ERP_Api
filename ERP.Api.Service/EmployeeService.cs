@@ -48,19 +48,19 @@ public class EmployeeService : IEmployeeService
         }
     }
 
-    public async Task<Employee> GetByName(string name)
+    public async Task<IEnumerable<Employee>> GetByName(string name)
     {
         using (var connection = _context.CreateConnection())
         {
             try
             {
-                var mysql = @"SELECT id, name, lastname, state, dni, code_employee FROM employee WHERE name = @Name LIMIT 1";
-                var result = await connection.QueryFirstOrDefaultAsync<Employee>(mysql, new {Name = name});
+                var mysql = @"SELECT id, name, lastname, state, dni, code_employee FROM employee WHERE name LIKE @Name LIMIT 5";
+                var result = await connection.QueryAsync<Employee>(mysql, new {Name = name + "%"});
                 return result;
             }
             catch (Exception)
             {
-                return new Employee();
+                return new List<Employee>();
             }
         }
     }
