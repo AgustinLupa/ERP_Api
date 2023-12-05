@@ -94,7 +94,7 @@ namespace ERP.Api.Service
             {
                 try
                 { 
-                    var mysql = @"UPDATE users SET name = @Name, password=@Password, id_role=@Id_Role, state=@State where (id = @Id) LIMIT 1";
+                    var mysql = @"UPDATE users SET name = @Name, id_role=@Id_Role, state=@State where (id = @Id) LIMIT 1";
                     var result = await connection.ExecuteAsync(mysql, user);                    
                     return result;                   
                 }

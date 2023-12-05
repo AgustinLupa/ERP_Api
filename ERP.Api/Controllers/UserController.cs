@@ -105,7 +105,7 @@ namespace ERP.Api.Controllers
 
         [HttpPut, Authorize(Roles = "Admin")]
         [Route("update/{id}")]
-        public async Task<IActionResult> Update(int id, [FromBody] SaveUser editUser)
+        public async Task<IActionResult> Update(int id, [FromBody] EditUser editUser)
         {
             if (ModelState.IsValid == false) return ValidationProblem(ModelState);
             if (Enum.IsDefined(typeof(Roles), editUser.id_role) == false)
@@ -119,7 +119,6 @@ namespace ERP.Api.Controllers
             {
                 Id = id,
                 Name = editUser.username,
-                Password = KeySha256.CalculateSHA256(editUser.password),
                 Id_Role = (int)editUser.id_role,
                 State = editUser.state
             };
