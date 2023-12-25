@@ -3,7 +3,9 @@
 [![Contributors][contributors-shield]][contributors-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
+[![Agustin][agus-shield]][agus-url]
+[![Maxi][maxi-shield]][maxi-url]
+[![Mati][mati-shield]][mati-url]
 
 <!-- PROJECT LOGO -->
 <br />
@@ -194,8 +196,12 @@ Project Link: [https://github.com/github_username/repo_name](https://github.com/
 [stars-url]: https://github.com/AgustinLupa/ERP_Api/stargazers
 [issues-shield]: https://img.shields.io/github/issues/AgustinLupa/ERP_Api.svg?style=for-the-badge
 [issues-url]: https://github.com/AgustinLupa/ERP_Api/issues
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://www.linkedin.com/in/agustin-luparini-242ab51b7/
+[agus-shield]: https://img.shields.io/badge/-Luparini-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+[agus-url]: https://www.linkedin.com/in/agustin-luparini-242ab51b7/
+[maxi-shield]: https://img.shields.io/badge/-Scollo-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+[maxi-url]: https://www.linkedin.com/in/maximiliano-scollo-abbb7811b/
+[mati-shield]: https://img.shields.io/badge/-Lupo-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+[mati-url]: https://www.linkedin.com/in/matias-lupo/
 [product-screenshot]: images/screenshot.png
 [.NET-Core]: https://img.shields.io/badge/.NET_Core-793FC5?style=for-the-badge&logo=dotnet&logoColor=white
 [.NET-url]: https://learn.microsoft.com/en-us/dotnet/
