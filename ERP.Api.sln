@@ -11,8 +11,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ERP.Api.Service", "ERP.Api.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ERP.Api.Utils", "ERP.Api.Utils\ERP.Api.Utils.csproj", "{B5DB80CE-2D89-423A-8085-3C9DA8B1EA5F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ERP.Api.Repository", "ERP.Repository\ERP.Api.Repository.csproj", "{FD3EE639-2CD6-483E-A73D-25BD5934091E}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,10 +33,6 @@ Global
 		{B5DB80CE-2D89-423A-8085-3C9DA8B1EA5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B5DB80CE-2D89-423A-8085-3C9DA8B1EA5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B5DB80CE-2D89-423A-8085-3C9DA8B1EA5F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FD3EE639-2CD6-483E-A73D-25BD5934091E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FD3EE639-2CD6-483E-A73D-25BD5934091E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FD3EE639-2CD6-483E-A73D-25BD5934091E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FD3EE639-2CD6-483E-A73D-25BD5934091E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
