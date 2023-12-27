@@ -1,12 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.Extensions.Configuration;
+using MySql.Data.MySqlClient;
+using System.Data;
 
-namespace ERP.Api.Repository
+namespace ERP.Api.Repository;
+
+public class ERPContext
 {
-    internal class Context
+    private readonly IConfiguration _configuration;
+    private readonly string? _connectionString;
+
+    public ERPContext(IConfiguration configuration)
     {
+        _configuration = configuration;
+        _connectionString = _configuration.GetConnectionString("DefaultConnection");
     }
+
+    public IDbConnection CreateConnection() => new MySqlConnection(_connectionString);
 }
