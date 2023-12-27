@@ -1,7 +1,7 @@
 ﻿using Dapper;
 using ERP.Api.Entity.Contracts;
 using MySql.Data.MySqlClient;
-using SystemERP.Model;
+using ERP.Api.Entity;
 
 namespace ERP.Api.Service;
 
