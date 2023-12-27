@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ERP.Api.Entity", "ERP.Api.E
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ERP.Api.Service", "ERP.Api.Service\ERP.Api.Service.csproj", "{4F7D2764-2533-4232-B704-86AE82697F1A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ERP.Api.Utils", "ERP.Api.Utils\ERP.Api.Utils.csproj", "{B5DB80CE-2D89-423A-8085-3C9DA8B1EA5F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ERP.Api.Utils", "ERP.Api.Utils\ERP.Api.Utils.csproj", "{B5DB80CE-2D89-423A-8085-3C9DA8B1EA5F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
