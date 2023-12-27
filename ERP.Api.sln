@@ -11,6 +11,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ERP.Api.Service", "ERP.Api.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ERP.Api.Utils", "ERP.Api.Utils\ERP.Api.Utils.csproj", "{B5DB80CE-2D89-423A-8085-3C9DA8B1EA5F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ERP.Api.Repository", "ERP.Api.Repository\ERP.Api.Repository.csproj", "{6B071998-A07B-483A-8356-B44FC82ACB12}"
+	ProjectSection(ProjectDependencies) = postProject
+		{6156FA60-1B2B-4D0A-95E5-F0BFFA938004} = {6156FA60-1B2B-4D0A-95E5-F0BFFA938004}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +38,10 @@ Global
 		{B5DB80CE-2D89-423A-8085-3C9DA8B1EA5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B5DB80CE-2D89-423A-8085-3C9DA8B1EA5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B5DB80CE-2D89-423A-8085-3C9DA8B1EA5F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B071998-A07B-483A-8356-B44FC82ACB12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B071998-A07B-483A-8356-B44FC82ACB12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B071998-A07B-483A-8356-B44FC82ACB12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B071998-A07B-483A-8356-B44FC82ACB12}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
