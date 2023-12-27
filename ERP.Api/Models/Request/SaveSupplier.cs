@@ -1,6 +1,5 @@
 ﻿using ERP.Api.Entity;
 using System.ComponentModel.DataAnnotations;
-using SystemERP.Model;
 
 namespace ERP.Api.Models.Request;
 
