@@ -1,4 +1,4 @@
-﻿using SystemERP.Model;
+﻿using ERP.Api;
 
 namespace ERP.Api.Entity.Contracts;
 
