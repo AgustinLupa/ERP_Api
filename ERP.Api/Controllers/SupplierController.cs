@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ERP.Api.Models.Response;
 using ERP.Api.Models.Request;
-using ERP.Api.Entity;
+using ERP.Api.Models.Tools;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -25,26 +25,20 @@ public class SupplierController : ControllerBase
     public async Task<IActionResult> GetAll()
     {
         var result= await _service.GetAll();
-        if (result == null || (result.Any() == false))
-            return StatusCode(204, new HttpResult
-            {
-                StatusCode = 204,
-                Message = "No se han encontrado proveedores."
-            });
+        if (result.Any() == false)
+            return StatusCode(204, 
+                new HttpResult(204, "No se han encontrado proveedores."));
+
         return Ok(new HttpResult { Response = result});
     }
 
-    [HttpGet, Authorize]
-    [Route("active")]
+    [HttpGet("active"), Authorize]
     public async Task<IActionResult> GetActive()
     {
         var result = await _service.GetActiveSupplier();
-        if (result == null || (result.Any() == false))
-            return StatusCode(204, new HttpResult
-            {
-                StatusCode = 204,
-                Message = "No se han encontrado proveedores activos."
-            });
+        if (result.Any() == false)
+            return StatusCode(204,
+                new HttpResult(204, "No se han encontrado proveedores activos."));
         return Ok(new HttpResult { Response = result });
     }
 
@@ -53,15 +47,10 @@ public class SupplierController : ControllerBase
     public async Task<IActionResult> Get(int id)
     {
         var result = await _service.GetById(id);
-        if (result == null)
-        {
-            return NotFound(new HttpResult
-            {
-                StatusCode = 404,
-                Message= "No se ha encontrado el proveedor buscado.",
-                Request= id
-            });
-        }
+        if (result.Id == 0)
+            return NotFound(
+                new HttpResult(404, "No se ha encontrado el proveedor buscado.", request: id));
+        
         return Ok( new HttpResult { Response= result});
     }
 
@@ -70,15 +59,10 @@ public class SupplierController : ControllerBase
     public async Task<IActionResult> GetByName(string name)
     {
         var result = await _service.GetByName(name);
-        if (result == null)
-        {
-            return NotFound(new HttpResult
-            {
-                StatusCode = 404,
-                Message = "No se ha encontrado el proveedor buscado.",
-                Request = name
-            });
-        }
+        if (result.Any() == false)
+            return NotFound(
+                new HttpResult(404, "No se han encontrado proveedores con el nombre buscado.", request: name));
+
         return Ok(new HttpResult { Response = result });
     }
 
@@ -87,19 +71,12 @@ public class SupplierController : ControllerBase
     public async Task<IActionResult> Create([FromBody] SaveSupplier newSupplier)
     {
         if (ModelState.IsValid == false) return ValidationProblem(ModelState);
-        var supplier = new Supplier {
-               Name = newSupplier.Name,
-               Adress = newSupplier.Address,
-               Phone = newSupplier.Phone,
-               State = newSupplier.State,
-            };
+        var supplier = newSupplier.MapToSupplierDTO();
+
         var result = await _service.CreateSupplier(supplier);
-        if (result == 0) return StatusCode(500, new HttpResult
-            {
-                StatusCode= 500,
-                Message= "Ha ocurrido un error inesperado al intentar crear el proveedor.",
-                Request= newSupplier
-            });
+        if (result == 0) return StatusCode(500,
+            new HttpResult(500, "Ha ocurrido un error inesperado al intentar crear el proveedor.", request: newSupplier));
+
         return Ok(new HttpResult { Message = "Proveedor creado con éxito."});
     }
 
@@ -108,21 +85,13 @@ public class SupplierController : ControllerBase
     public async Task<IActionResult> Put(int id, [FromBody] SaveSupplier editSupplier)
     {
         if (ModelState.IsValid == false) return ValidationProblem(ModelState);
-        var supplier = new Supplier
-        {
-            Id = id,
-            Name = editSupplier.Name,
-            Adress = editSupplier.Address,
-            Phone = editSupplier.Phone,
-            State = editSupplier.State,
-        };
+        var supplier = editSupplier.MapToSupplierDTO(id);
+
         var result = await _service.UpdateSupplier(supplier);
-        if (result == false) return NotFound(new HttpResult
-        {
-            StatusCode = 404,
-            Message = "No se ha encontrado al proveedor.",
-            Request = editSupplier
-        });
+        if (result == false) 
+            return NotFound(
+                new HttpResult(404, "No se ha encontrado al proveedor.", request: editSupplier));
+
         return Ok(new HttpResult { Message = "Proveedor actualizado con éxito." });
     }
 
@@ -132,7 +101,7 @@ public class SupplierController : ControllerBase
     {
         var result = await _service.DeleteSupplier(id);
         if (result == false)
-            return NotFound(new HttpResult { Message= "No se ha encontrado al proveedor." });
+            return NotFound(new HttpResult { Status=404, Message= "No se ha encontrado al proveedor." });
         return Ok(new HttpResult { Message= "Proveedor eliminado con exito." });
     }
 }
